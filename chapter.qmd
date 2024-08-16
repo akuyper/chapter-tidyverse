@@ -1,0 +1,56 @@
+---
+title: "Using R (RStudio + Tidyverse)"
+author: "Arend M Kuyper"
+
+# format:
+#   html:
+#     toc: true
+#     toc-location: left
+#     embed-resources: true
+#     link-external-newwindow: true
+#     code-fold: true
+#     fig-dpi: 300
+
+format: docx
+
+execute:
+  warning: false
+  echo: false
+  
+bibliography: 'https://api.citedrive.com/bib/5d5433a7-708d-44c1-92c7-9561963807cd/references.bib?x=eyJpZCI6ICI1ZDU0MzNhNy03MDhkLTQ0YzEtOTJjNy05NTYxOTYzODA3Y2QiLCAidXNlciI6ICIxMjc3OCIsICJzaWduYXR1cmUiOiAiNDYzYWRlM2ExZGFlMmE2ZDQ1MDlkYmY1ZjY5OTZhOWRhMjEwNjQyYmViYjY5NWYwNzM0YzE3NzI3YmM0NTkxOSJ9'
+bibliographystyle: apa
+# csl: 'https://raw.githubusercontent.com/citation-style-language/styles/master/apa-6th-edition.csl'
+
+from: markdown+emoji 
+---
+
+
+## Introduction
+
+The purpose of this chapter is to provide you with an introduction to the free statistical software R along with RStudio and the tidyverse packages. While R can have a steep learning curve and be intimidating to new users, especially those new to coding, RStudio and the tidyverse packages make R much more accessible. Beyond improving accessibility, these tools are intentionally designed to make users more productive with R and improve the reproducibility of their work. Not surprisingly, this chapter is focused on the "how to" of foundational data work
+
+
+RStudio is an integrated development environment (IDE) specifically designed to help users be more efficient and effective with R (and Python). The tidyverse, as described on its is a popular collection of packages or libraries that all share an underlying design philosophy, grammar, and data structures. 
+
+> The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. [@Tidyverse-2024-08-15]
+
+
+## Dataset
+
+
+## Conclusion
+
+
+---
+
+## Research essentials
+
+## Questions for further investigation
+
+## Suggested further reading
+
+
+## References
+
+::: {#refs}
+:::
