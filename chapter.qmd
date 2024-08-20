@@ -27,12 +27,7 @@ from: markdown+emoji
 
 ## Introduction
 
-The purpose of this chapter is to provide you with an introduction to the free statistical software R along with RStudio and the tidyverse packages. While R can have a steep learning curve and be intimidating to new users, especially those new to coding, RStudio and the tidyverse packages make R much more accessible. Beyond improving accessibility, these tools are intentionally designed to make users more productive with R and improve the reproducibility of their work. Not surprisingly, this chapter is focused on the "how to" of foundational data work
-
-
-RStudio is an integrated development environment (IDE) specifically designed to help users be more efficient and effective with R (and Python). The tidyverse, as described on its is a popular collection of packages or libraries that all share an underlying design philosophy, grammar, and data structures. 
-
-> The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. [@Tidyverse-2024-08-15]
+The purpose of this chapter is to provide you with an introduction to the free statistical software R along with RStudio and the tidyverse packages. While R can have a steep learning curve and be intimidating to new users, especially those new to coding, RStudio and the tidyverse packages make R much more accessible. Beyond improving accessibility, these tools are intentionally designed to make users more productive with R and improve the reproducibility of their work. Not surprisingly, this chapter is focused on the "how to" of foundational data work. We will highlight and demonstrate essential best practices for using R with RStudio and the tidyverse for quantitative research. However, don't let this chapter's focus on first steps of data work deceive, R and its ecosystem of extension packages allow for the implementation of all the statistical techniques found in this book and much, much more.
 
 ## R
 
@@ -45,9 +40,9 @@ The R project is a GNU project, which means it is a free software, mass collabor
 
 The base R system is actively maintained and updated for various operating systems by the R Core Team. Typically there is 1 major update along with 2 minor updates per year. Having an active release schedule like this is critical for the success of open-source software. This ensures up-to-date compatibility with operating systems and signals to users that it won't be abandoned.
 
-While the base R system adequately covers most statistical needs and functionality, it is arguably the large ecosystem of extension packages that has contributed to R's growth. Packages can provide implementations of methodologies not currently in base R, improve the usability of R, or provide tools that allow you to do non-statistical tasks (i.e. sending emails or building websites). 
+While the base R system adequately covers most statistical needs and functionality, it is arguably the large ecosystem of extension packages that has contributed to R's growth. Packages can provide implementations of methodologies not currently in base R, improve the usability of R, or provide tools that allow you to do non-statistical tasks (i.e. sending emails or building websites). In particular, the tidyverse packages have been very influential and have made working with R significantly more accessible. We will take a closer look at the tidyverse packages later in this chapter.
 
-As of this writing, the CRAN package repository features over 21,000 contributed packages. The CRAN repository checks all packages for compatibility and expects the packages to be maintained, which means users can expect packages the CRAN repository to work with R. This work is done by a network of volunteers, called the CRAN team, and it is a testament to the size and dedication of the R community that this is possible. Though CRAN is the considered the primary R package repository, users can find packages through:
+As of this writing, the CRAN package repository features over 21,000 contributed packages. The CRAN repository checks all packages for compatibility and expects the packages to be maintained, which means users can expect packages from the CRAN repository to work with R. This work is done by a network of volunteers, called the CRAN team, and it is a testament to the size and dedication of the R community that this is possible. Though CRAN is the primary R package repository, users can find packages through:
 
 - CRAN-like repositories such as BioConductor and R-forge;
 - GitHub and BitBucket;
@@ -55,19 +50,31 @@ As of this writing, the CRAN package repository features over 21,000 contributed
 
 While packages outside of the CRAN repository aren't vetted by the CRAN team for compatibility, they can be very useful. They may implement cutting edge statistical techniques or provide tools for more bespoke analyses. Going through the CRAN submission process can be daunting, time intensive, and restrictive so it is not uncommon to find very useful packages not hosted on CRAN. 
 
-A common roadblock for many new users of R is that the software is not point and click. It requires the users to write code or commands. This can be a significant hurdle for many, but through are several free software options that make working with R much more user-friendly. 
+### Using R
+
+A common roadblock for many new R users is that it requires the users to write code or commands. This can be a significant hurdle for many, but there are several free software options that make working with R much more user-friendly. The most popular being RStudio, which we will discuss in more detail later on in the chapter. The need to write code or commands isn't removed, but it is made much more intuitive and accessing help is made easier. Using R and having to write code is a net positive for increasing the reproducibility of research, at least for computational and analysis work. 
+
+The value of learning to write R code is significantly enhanced by following best practices for coding and setting up workflows. When users are first learning it can seem unnecessary to follow such advice, but it is important to avoid developing bad and inefficient habits. RStudio and the tidyverse are specifically designed to guide users to follow and implement best practices. We will be highlighting and demonstrating some of these best practices in the following sections, but readers wanting more guidance should  see the **Suggested further readings**.
 
 ## RStudio
 
+Description of RStudio with images, setting global options for best practices, and using projects as a best practice
 
 ## Tidyverse
 
+> The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. [@Tidyverse-2024-08-15]
 
-## Dataset
+Overview of core packages and adjacent packages
 
+Comment about piping
 
-## Best practices 
+### Dataset
 
+Quick overview of dataset to be used.
+
+### dplyr: data wrangling
+
+### ggplot2: data visualization
 
 ## Conclusion
 
@@ -79,6 +86,10 @@ A common roadblock for many new users of R is that the software is not point and
 ## Questions for further investigation
 
 ## Suggested further reading
+
+@ggplot2-online-book
+
+@r4ds
 
 ## References
 
