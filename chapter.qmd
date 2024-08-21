@@ -70,13 +70,21 @@ Comment about piping
 
 ### Dataset
 
-Quick overview of dataset to be used.
+Quick overview of dataset to be used in demo.
 
 ### dplyr: data wrangling
 
+Demo(s) with comments and a few tips for best practices
+
 ### ggplot2: data visualization
 
+Demo(s) with comments and a few tips for best practices
+
+## Comment: AI & R coding
+
+
 ## Conclusion
+
 
 
 ---
