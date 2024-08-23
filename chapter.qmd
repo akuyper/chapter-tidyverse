@@ -18,8 +18,7 @@ execute:
   echo: false
   
 bibliography: 'https://api.citedrive.com/bib/5d5433a7-708d-44c1-92c7-9561963807cd/references.bib?x=eyJpZCI6ICI1ZDU0MzNhNy03MDhkLTQ0YzEtOTJjNy05NTYxOTYzODA3Y2QiLCAidXNlciI6ICIxMjc3OCIsICJzaWduYXR1cmUiOiAiNDYzYWRlM2ExZGFlMmE2ZDQ1MDlkYmY1ZjY5OTZhOWRhMjEwNjQyYmViYjY5NWYwNzM0YzE3NzI3YmM0NTkxOSJ9'
-bibliographystyle: apa
-# csl: 'https://raw.githubusercontent.com/citation-style-language/styles/master/apa-6th-edition.csl'
+csl: 'https://raw.githubusercontent.com/citation-style-language/styles/master/apa-6th-edition.csl'
 
 from: markdown+emoji 
 ---
@@ -81,7 +80,9 @@ Demo(s) with comments and a few tips for best practices
 Demo(s) with comments and a few tips for best practices
 
 ## Comment: AI & R coding
+@edge-data 
 
+@edge-cwift-tech-report
 
 ## Conclusion
 
