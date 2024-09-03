@@ -55,60 +55,48 @@ The value of learning to write R code is significantly enhanced by following bes
 
 ## RStudio
 
-RStudio is an integrated development environment (IDE) designed to make working with R more accessible and productive. While R comes with its own graphical user interface (GUI), it simply was not designed with a wide range of users in mind. So, it is common that R be paired with some other open source software such as RStudio, R Commander, Deducer, jupyter notebooks, vscode, or positron. RStudio is by far the most widely used and known. A significant portion of R's growth in usage can be reasonably attributed to RStudio. It has become synonymous with R. RStudio can be downloaded for free from https://posit.co/download/rstudio-desktop/. 
+RStudio is an integrated development environment (IDE) designed to make working with R more accessible and productive. While R comes with its own graphical user interface (GUI), it simply was not designed with a wide range of users in mind. So, it is common that R be paired with some other open source software such as RStudio, R Commander, Deducer, jupyter notebooks, vscode, or positron. RStudio is by far the most widely used and known. A significant portion of R's growth in usage can be reasonably attributed to RStudio. It has become synonymous with R. RStudio can be downloaded for free from https://posit.co/download/rstudio-desktop/.
 
-When RStudio is first opened, there are 4 panes as seen in @fig-rstudio-layout. Sometimes the source pane is missing, but that is easily remedied by opening a new R script (.R file): **File > New File > R Script**.
+When RStudio is first opened, there are 4 panes as seen in @fig-rstudio-layout. Sometimes the source pane is missing, but that is easily remedied by opening a new R script (.R file): **File \> New File \> R Script**.
 
-1. The **Source pane** is where you can edit and save R scripts, which are essentially text files containing R code. This is where most of the data analysis work happens and should be documented.  
+1.  The **Source pane** is where you can edit and save R scripts, which are essentially text files containing R code. This is where most of the data analysis work happens and should be documented.
 
-1. The **Console pane** is used to write short interactive R commands. 
+2.  The **Console pane** is used to write short interactive R commands.
 
-1. The **Environment pane** displays temporary R objects as created during that R session. It also contains the useful history tab.
+3.  The **Environment pane** displays temporary R objects as created during that R session. It also contains the useful history tab.
 
-1. The **Output pane** displays the plots, tables, or HTML outputs of executed code along with saved files. This pane also includes the packages and help tabs which are especially useful since the first is for managing and installing packages and the second is setup to help access documentation. 
+4.  The **Output pane** displays the plots, tables, or HTML outputs of executed code along with saved files. This pane also includes the packages and help tabs which are especially useful since the first is for managing and installing packages and the second is setup to help access documentation.
 
 ![RStudio's basic layout](image/rstudio-layout.png){#fig-rstudio-layout fig-alt="RStudio's basic layout consisting of 4 panes: source, environment, console, & files" fig-align="center"}
 
-Before we even start working with data there are 2 essential best practices that should be discussed:
+### Prepare for success
 
-1. Adjustment of a few RStudio default options to improve long-term reproducibility of the data analysis work. 
+Before starting to work with data, there are 2 best practices that should be discussed:
 
-1. Improve organization and collaboration (this includes with your future self) by always using RStudio projects. 
+1.  Adjusting a few RStudio default options to improve long-term reproducibility of your data analysis work.
 
-When you quit R, do not save the workspace to an .Rdata file. When you launch, do not reload the workspace from an .Rdata file. Long-term reproducibility is enhanced when you turn this feature off and clear R's memory at every restart. Starting with a blank slate provides timely feedback that encourages the development of scripts that are complete and self-contained.
-The changing these options ensures development of R scripts that are complete and self-contained records of the data work. 
+2.  Use RStudio projects to improve organization and collaboration, which includes with your future self.
 
-In RStudio, set this via **Tools > Global Options**, uncheck "Restore .RData into Workspace at Startup" and choose **Never** on the "Save workspace to .RData on exit". See @fig-rstudio-wrk-options.
+By default, workspaces will load everything that you had been working on previously, from .Rdata files. While this might sound harmless or even desirable, it actually creates a workflow that could easily lead to ghost or zombie objects. That is, objects that are not reproducible because we may have ran code out of order ot altered code and forgot to re-run it to update things. By being automatically saved we might not catch this error until it is way too late. So, to develop R scripts that are complete and self-contained records of the data work we need to make a few adjustments. In RStudio, set this via **Tools \> Global Options**, uncheck "Restore .RData into Workspace at Startup" and choose **Never** on the "Save workspace to .RData on exit" as seen in @fig-rstudio-wrk-options.
 
-![RStudio's Globol Options: Workspace Best Practice](image/rstudio-workspace-options.png){#fig-rstudio-wrk-options fig-alt="Adjusting RStudio's global options for workspaces to not restore at startup and never save on exit." fig-align="center"}
+![RStudio's Globol Options: Workspace Best Practice](image/rstudio-workspace-options.png){#fig-rstudio-wrk-options fig-alt="Adjusting RStudio's global options for workspaces to not restore at startup and never save on exit." fig-align="center" width="696"}
 
-### Work in projects
+The larger and more sprawling research and analysis work gets, the more important it becomes to be organized. Meaning, it is important to have a "home base" of operations where everything for your data analysis or research work is self contained. By using RStudio projects it becomes straightforward to organize your work. You can think of an RStudio project as being a home directory/folder that will ultimately contain everything for your data analysis project. RStudio projects provide a solid workflow that will serve you well in the future:
 
-RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.
+-   When starting a data analysis project (or any work in R), create a new RStudio project,
+-   Keep all data files there; organized in a data sud-directory.
+-   Keep all scripts there; edit them, run them in bits or as a whole. Naming them sequentially (e.g. 0-loading-data.R, 1-inspecting-data.R, etc) is recommended.
+-   Save your outputs (plots and cleaned data) there. Organized into appropriate sub-directories or folders
 
-To create a new project in the RStudio, use the File > New Project command.
+By using an RStudio project, everything you need is in one place, and cleanly separated from all the other projects that you are working on. The also make collaboration easier. The folders could be maintained on a shared drive so or version control software like git can be integrated into the projects. If used appropriately, then we should be able to simply zip/compress the RStudio project folder and share it with anyone else. 
 
-In the New Project wizard that pops up, select New Directory, then New Project. Name the project “hello-ggplot2” and then click the Create Project button.
+To create a new project in the RStudio, use the **File \> New Project**. In the New Project wizard that pops up, select **New Directory**, then **New Project**. Pick a name for the project, for example "cwift-examples" (name of project for examples provided later in this chapter), and then click the **Create Project** button. This will launch a new RStudio Project inside a new folder called "cwift-examples". The name of the project should show in the top-right hand corner of rstudio as seen in FIGURE REFERENCE.
 
-This will launch you into a new RStudio Project inside a new folder called “hello-ggplot2”.
+tab is your best friend (auto complete and accessing help)
 
-RStudio projects give you a solid workflow that will serve you well in the future:
+RStudio is maintained by Posit PBC (Public Benefit Corporation), previously named RStudio. Posit is a leading company in the R ecosystem, not only because of RStudio, but because of their investments in open source software (e.g. tidyverse, tidymodels, quarto, shiny, etc) and education/training. They supply free content to help
 
-- Create an RStudio project for each data analysis project.
-
-- Keep data files there; we’ll talk about loading them into R in Local Data.
-
-- Keep scripts there; edit them, run them in bits or as a whole.
-
-- Save your outputs (plots and cleaned data) there.
-
-Everything you need is in one place, and cleanly separated from all the other projects that you are working on.
-
-tab is your best friend (autocomplete and accessing help)
-
-RStudio is maintained by Posit PBC (Public Benefit Corporation), previously named RStudio. Posit is a leading company in the R ecosystem, not only because of RStudio, but because of their investments in open source software (e.g. tidyverse, tidymodels, quarto, shiny, etc) and education/training. They supply free content to help 
-
-Loading packages lead into tidyverse 
+Loading packages lead into tidyverse
 
 ## Tidyverse
 
@@ -120,23 +108,23 @@ Overview of core packages and adjacent packages
 
 The core tidyverse includes the packages that you're likely to use in everyday data analyses. As of tidyverse 2.0, the following packages are included in the core tidyverse:
 
-- `ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+-   `ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
 
-- `dplyr` provides a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges. 
+-   `dplyr` provides a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
 
-- `tidyr` provides a set of functions that help you get to tidy data. Tidy data is data with a consistent form: in brief, every variable goes in a column, and every column is a variable.
+-   `tidyr` provides a set of functions that help you get to tidy data. Tidy data is data with a consistent form: in brief, every variable goes in a column, and every column is a variable.
 
-- readr provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf).
+-   readr provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf).
 
-- purrr enhances R’s functional programming toolkit by providing a complete and consistent set of tools for working with functions and vectors.
+-   purrr enhances R’s functional programming toolkit by providing a complete and consistent set of tools for working with functions and vectors.
 
-- tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not. 
+-   tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not.
 
-- `stringr` provides a cohesive set of functions designed to make working with strings as easy as possible.
+-   `stringr` provides a cohesive set of functions designed to make working with strings as easy as possible.
 
-- `forcats` provides a suite of useful tools that solve common problems with factors. 
+-   `forcats` provides a suite of useful tools that solve common problems with factors.
 
-- `lubridate` provides a set of tools to make it easier to work with dates and times in R, which can be difficult and inconsistent in base R.
+-   `lubridate` provides a set of tools to make it easier to work with dates and times in R, which can be difficult and inconsistent in base R.
 
 Pipping
 
@@ -154,11 +142,9 @@ my_data |>
   f()
 ```
 
-
 ### Dataset
 
-Education Demographic and Geographic Estimates (EDGE) Program
-American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT)
+Education Demographic and Geographic Estimates (EDGE) Program American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT)
 
 @edge-data
 
@@ -178,7 +164,7 @@ Demo(s) with comments and a few tips for best practices
 
 ## Conclusion
 
-Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used to document the work. While beyond the scope chapter, we encourge you to 
+Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used to document the work. While beyond the scope chapter, we encourge you to
 
 version control git & git hub
 
