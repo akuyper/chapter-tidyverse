@@ -17,7 +17,7 @@ execute:
   warning: false
   
 bibliography: 'https://api.citedrive.com/bib/5d5433a7-708d-44c1-92c7-9561963807cd/references.bib?x=eyJpZCI6ICI1ZDU0MzNhNy03MDhkLTQ0YzEtOTJjNy05NTYxOTYzODA3Y2QiLCAidXNlciI6ICIxMjc3OCIsICJzaWduYXR1cmUiOiAiNDYzYWRlM2ExZGFlMmE2ZDQ1MDlkYmY1ZjY5OTZhOWRhMjEwNjQyYmViYjY5NWYwNzM0YzE3NzI3YmM0NTkxOSJ9'
-csl: 'https://raw.githubusercontent.com/citation-style-language/styles/master/apa-6th-edition.csl'
+csl: 'https://raw.githubusercontent.com/citation-style-language/styles/master/apa-annotated-bibliography.csl'
 
 from: markdown+emoji 
 ---
@@ -90,41 +90,41 @@ The larger and more sprawling research and analysis work gets, the more importan
 
 By using an RStudio project, everything you need is in one place, and cleanly separated from all the other projects that you are working on. The also make collaboration easier. The folders could be maintained on a shared drive so or version control software like git can be integrated into the projects. If used appropriately, then we should be able to simply zip/compress the RStudio project folder and share it with anyone else. 
 
-To create a new project in the RStudio, use the **File \> New Project**. In the New Project wizard that pops up, select **New Directory**, then **New Project**. Pick a name for the project, for example "cwift-examples" (name of project for examples provided later in this chapter), and then click the **Create Project** button. This will launch a new RStudio Project inside a new folder called "cwift-examples". The name of the project should show in the top-right hand corner of rstudio as seen in FIGURE REFERENCE.
-
-tab is your best friend (auto complete and accessing help)
-
-RStudio is maintained by Posit PBC (Public Benefit Corporation), previously named RStudio. Posit is a leading company in the R ecosystem, not only because of RStudio, but because of their investments in open source software (e.g. tidyverse, tidymodels, quarto, shiny, etc) and education/training. They supply free content to help
-
-Loading packages lead into tidyverse
+To create a new project in the RStudio, use the **File \> New Project**. In the New Project wizard that pops up, select **New Directory**, then **New Project**. Pick a name for the project, for example "cwift-examples" (name of project for examples provided later in this chapter), and then click the **Create Project** button. This will launch a new RStudio Project inside a new folder called "cwift-examples". The name of the project should appear in the top-right hand corner of Rstudio as seen in FIGURE REFERENCE. A good piece of advice, if it says "Project: (None)", then don't do any work. Set up a miscellaneous project for scratch work and musings. Always be working in a project.
 
 ## Tidyverse
 
 > The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. [@Tidyverse-2024-08-15]
 
-Everything that we can do with tidyverse tools can be done with base R tools.
+This generally makes the tidyverse syntax easier to read and implement, especially for those new to coding and data analytic work. It makes chaining together data processing steps intuitive and easier than in other programming languages. The core tidyverse packages are those most likely needed for everyday data analyses and are all loaded by the meta `{tidyverse}` package. As of `{tidyverse}` 2.0, the following 9 packages are included in the core tidyverse:
 
-Overview of core packages and adjacent packages
+-   `{ggplot2}` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
 
-The core tidyverse includes the packages that you're likely to use in everyday data analyses. As of tidyverse 2.0, the following packages are included in the core tidyverse:
+-   `{dplyr}` provides a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
 
--   `ggplot2` is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+-   `{tidyr}` provides a set of functions that help you get to tidy data. Tidy data is data with a consistent form: in brief, every variable goes in a column, and every column is a variable.
 
--   `dplyr` provides a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
+-   `{readr}` provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf).
 
--   `tidyr` provides a set of functions that help you get to tidy data. Tidy data is data with a consistent form: in brief, every variable goes in a column, and every column is a variable.
+-   `{purrr}` enhances R’s functional programming toolkit by providing a complete and consistent set of tools for working with functions and vectors.
 
--   readr provides a fast and friendly way to read rectangular data (like csv, tsv, and fwf).
+-   `{tibble}` is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not.
 
--   purrr enhances R’s functional programming toolkit by providing a complete and consistent set of tools for working with functions and vectors.
+-   `{stringr}` provides a cohesive set of functions designed to make working with strings as easy as possible.
 
--   tibble is a modern re-imagining of the data frame, keeping what time has proven to be effective, and throwing out what it has not.
+-   `{forcats}` provides a suite of useful tools that solve common problems with factors (categorical variables).
 
--   `stringr` provides a cohesive set of functions designed to make working with strings as easy as possible.
+-   `{lubridate}` provides a set of tools to make it easier to work with dates and times in R, which can be difficult and inconsistent in base R.
 
--   `forcats` provides a suite of useful tools that solve common problems with factors.
+To install the tidyverse packages, go to **output pane \> Packages \> Install**. The package install wizard will pop-up and enter "tidyverse" as the name of the page to download. Ensure that "Install dependencies" is checked, then click **Install**. Alternatively, we could have ran `install.packages("tidyverse")` in the console. Not only will we get the 9 core tidyverse packages, but all of the packages they are dependent on will also be installed. 
 
--   `lubridate` provides a set of tools to make it easier to work with dates and times in R, which can be difficult and inconsistent in base R.
+Beyond the core tidyverse packages, we will be using several additional packages as we work through a few data explorations in the next section. Packages such as `tidycenus` (tools to obtain census data in tidy format), `{janitor}` (tools for cleaning data), `{sf}` (tools for making maps), and `{skimr}` (tools to quickly skim data). Packages like `{tidycensus}` and `{janitor}` are often described as tidyverse-adjacent because they are built to work with the tidyverse and therefore adhere to the shared design philosophies. 
+
+The tidyverse's influence on the R package ecosystem has been transformative. It has laid a foundation upon which developers in a large open-source community can collaborate and build tools that are much more accessible (i.e. tidyverse-adjacent packages). Developers can build their packages to leverage all existing tools and benefits of the tidyverse ecosystem which helps to alleviate dependency issues and compatibility with current and future features. Ultimately, this means users will be able to pick up new packages much more efficiently because of the shared design philosophies and standards. 
+
+## Data Exploration Examples
+
+
 
 Pipping
 
@@ -142,13 +142,45 @@ my_data |>
   f()
 ```
 
+
 ### Dataset
 
-Education Demographic and Geographic Estimates (EDGE) Program American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT)
+We will be using data from the Education Demographic and Geographic Estimates (EDGE) Program. Specifically we will be using the American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT or CWIFT) [@edge-data]. 
 
-@edge-data
+> The Comparable Wage Index (CWI) is an index that was initially created by the National Center for
+Education Statistics (NCES) to facilitate comparison of educational expenditures across locales
+(principally school districts, or local educational agencies—LEAs) or states (state educational agencies—
+SEAs). The CWI is a measure of the systematic, regional variations in the wages and salaries of college
+graduates who are not PK-12 educators as determined by reported occupational category. It can be
+used by researchers to adjust district-level finance data at different levels in order to make better
+comparisons across geographic areas. [@edge-cwift-tech-report]
 
-@edge-cwift-tech-report
+The CWIFT is designed to identify geographic variation in wages for college-educated workers outside of
+the education field after controlling for job-related and demographic characteristics. The basic premise
+of any CWI is that all types of workers demand higher wages in areas where the cost of living is high or
+desirable local amenities (such as good climate, low crime rates, or access to beaches, museums, and
+fancy restaurants) are lacking. As a result, it should be possible to measure most of the geographic
+variation in the cost of hiring teachers and other PK-12 educators by observing systematic, regional
+variations in the wages of comparable workers who are not PK-12 educators.
+
+In theory, if accountants, nurses, and computer programmers, for example, all earn 5 percent more than
+the national average for their professions in Houston, then it is reasonable to expect that the cost of
+hiring teachers in Houston would also be 5 percent more than the national average for teachers.
+
+Using the Index to Make Geographic Adjustments
+
+One important reason for the development of the CWIFT is to enable more meaningful comparisons
+across school districts. To normalize dollar amounts and make them comparable, divide the dollar
+amounts by the district-level CWIFT, which are already normalized to the national average wage. For
+example, suppose one wished to make an adjustment to expenditure data from the Elementary and
+Secondary Information (ELSI) system for the 2013-14 school year. The 2015 CWIFT for Los Angeles
+Unified School District 1.129. So the \$6,137 total current expenditures on salary per pupil in Los Angeles Unified for 2013-14, when normalized, are equal to \$5,436 (\$6,137 / 1.129). The 2013-14 total current expenditures on salary per pupil by Palm Beach County School District (in Florida) were \$5,433.Normalized to reflect the lower cost of hiring in this area, they are the equivalent of \$5,677 (\$5,433 / 0.957). In other words, even though Los Angeles Unified School District spent more than Palm Beach County School District in nominal terms, once the two dollar figures were adjusted for the difference in purchasing power between the two districts, Palm Beach County School District effectively spent \$241 more per pupil than did Los Angeles Unified School District.
+
+Geographic Adjustment Applied to State Aid
+
+Because one of the great virtues of the CWIFT is that it is outside of school district control, another
+application of the CWIFT is to adjust state aid to a school district for differences in wages. For example, consider a program intended to provide an additional \$100 per pupil, but adjusted for geographic variations in the cost of education. The 2015 CWIFT for New Rochelle, NY in 2015 is 1.163, or 16.3 percent higher than the national average; the 2015 CWIFT for Buffalo, NY is 0.902, or approximately 10 percent lower than the national average. Therefore, to receive the same increase in purchasing power
+as a \$100 increase in Buffalo City School District, New Rochelle City School District would need to receive \$128.94 (\$100*(1.163 / 0.902))
 
 ### dplyr: data wrangling
 
@@ -160,7 +192,7 @@ Demo(s) with comments and a few tips for best practices
 
 ## Comment: AI & R coding
 
-`chattr` `tidychatmodels` GitHub `copilot`
+`chattr` `tidychatmodels` GitHub `copilot` `ask`
 
 ## Conclusion
 
@@ -174,11 +206,17 @@ version control git & git hub
 
 ## Questions for further investigation (50-100 words)
 
+How does getting setup compare to other statistical software you may have used? If setup was an issue, have you searched for any free workshops or materials online? Try using R with RStudio and the tidyverse by playing with a data project of your own and/or by downloading the data exploration examples RStudio project from its GitHub webpage (https://github.com/akuyper/cwift-examples). 
+
 ## Suggested further reading (50-100 words/3 resources & why)
 
 @ggplot2-online-book
 
 @r4ds
+
+[@tdyverse-sytle-guide]
+
+[@pkg-tidyverse]
 
 ## References
 
