@@ -55,7 +55,7 @@ The value of learning to write R code is significantly enhanced by following bes
 
 ## RStudio
 
-RStudio is an integrated development environment (IDE) designed to make working with R more accessible and productive. While R comes with its own graphical user interface (GUI), it simply was not designed with a wide range of users in mind. So, it is common that R be paired with some other open source software such as RStudio, R Commander, Deducer, jupyter notebooks, vscode, or positron. RStudio is by far the most widely used and known. A significant portion of R's growth in usage can be reasonably attributed to RStudio. It has become synonymous with R. RStudio can be downloaded for free from https://posit.co/download/rstudio-desktop/.
+RStudio is an integrated development environment (IDE) designed to make working with R more accessible and productive. While R comes with its own graphical user interface (GUI), it simply was not designed with a wide range of users in mind. So, it is common that R be paired with some other open source software such as RStudio, R Commander, Deducer, jupyter notebooks, vscode, or positron. RStudio is by far the most widely used and known. A significant portion of R's growth in usage can be reasonably attributed to RStudio. It has become synonymous with R. RStudio can be downloaded for free from <https://posit.co/download/rstudio-desktop/>.
 
 When RStudio is first opened, there are 4 panes as seen in @fig-rstudio-layout. Sometimes the source pane is missing, but that is easily remedied by opening a new R script (.R file): **File \> New File \> R Script**.
 
@@ -124,23 +124,21 @@ The tidyverse's influence on the R package ecosystem has been transformative. It
 
 ## Data Exploration Examples
 
-Now to demonstrate the use of R with RStudio and tidyverse tools. We will be going through the initial steps of examining data and exploring it. 
+Time to see R with RStudio and tidyverse in action. We will providing highlights from a short exploration of educational data that has a spatial or geographical component. The objective is to demonstrate the usefulness and flexibility of using these tools for data work. For those interested in seeing more details and/or wanting to work through the code directly, then please visit the GitHub repository (<https://github.com/akuyper/cwift-examples>) for this data exploration. We encourage readers to explore the GitHub repository because it is a demonstration of best practices put into action.  
 
-Pipping
+Before taking a closer look at the data and exploration work, let's peak at the layout of the project and discuss what we see in @fig-cwift-examples-project:
 
-```{r}
-#| label: piping
-#| eval: false
+- It is clear we are working in a project because the project name, "cwift-examples", is visible in the top-right corner. 
+- The R script in the Source Pane is well organized. It has comments to help guide humans through the code, it starts with a preamble that loads the necessary packages and data, and we see indentation and white/negative spaces being used to make the code more readable --- also makes it easier to debug. 
+- The Environment Pane contains items created by running the code. 
+- The Console Pane has remnants of code being ran (it is pushed from the source and executed/ran in the console). 
+- The Output Pane is displaying the Files tab and we can see the project well organized with appropriate sub-directories and file names.
 
-# non-piping
-f(g(h(my_data)))
+![Layout overview for the cwift-examples project](image/project-overview.png){#fig-cwift-examples-project fig-alt="Layout overview for the cwift-examples project" fig-align="center"}
 
-# piping
-my_data |> 
-  h() |> 
-  g() |> 
-  f()
-```
+Note on piping
+
+![Using piping or not in R](image/piping.png){#fig-piping fig-alt="Non-piping vs piping" fig-align="center"}
 
 
 ### The data
@@ -167,17 +165,17 @@ Another useful application of the CWIFT is to adjust state aid to a school distr
 
 Demo(s) with comments and a few tips for best practices
 
-![Demonstration of various plots that can be created when examining state CWIFT estimates: (A) Approximate 95% confidence intervals for state CWIFT estimates (B) Density plot for state CWIFT estimates (C) Boxplot for state CWIFT estimates, (D) A density dot plot for state CWIFT estimates](plots/state_plot_collection.png){#fig-state-plot-collection fig-alt="Demonstration of various plots that can be created when examining state CWIFT estimates" fig-align="center"}
+![Demonstration of various plots for examining state CWIFT estimates: (A) Approximate 95% confidence intervals for state CWIFT estimates (B) Density plot for state CWIFT estimates (C) Boxplot for state CWIFT estimates, (D) A density dot plot for state CWIFT estimates](plots/state_plot_collection.png){#fig-state-plot-collection fig-alt="Demonstration of various plots that can be created when examining state CWIFT estimates" fig-align="center"}
 
-![Demonstration of two choropleth/heat maps created when examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/state_heatmaps.png){#fig-state-heatmaps fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+![Demonstration of two choropleth/heat maps for examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/state_heatmaps.png){#fig-state-heatmaps fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
 
 ### ggplot2: data visualization
 
 Demo(s) with comments and a few tips for best practices
 
-![Demonstration of a grouped boxplot to examine county CWIFT estimates.  estimates](plots/cwift_estimates_by_state.png){#fig-county-estimates fig-alt="Demonstration of a grouped boxplot to examine county CWIFT estimates" fig-align="center"}
+![Demonstration of a grouped boxplot to examine county CWIFT estimates](plots/cwift_estimates_by_state.png){#fig-county-estimates fig-alt="Demonstration of a grouped boxplot to examine county CWIFT estimates" fig-align="center"}
 
-![Demonstration of a choropleth/heat map to examine county CWIFT estimates. estimates](plots/county_cwift_heatmap.png){#fig-us-county-heatmap fig-alt="Demonstration of a choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
+![Demonstration of a choropleth/heat map to examine county CWIFT estimates](plots/county_cwift_heatmap.png){#fig-us-county-heatmap fig-alt="Demonstration of a choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
 
 ![Demonstration of arranging plots to make comparisons between county CWIFT estimates within states. County maps with shading according to CWIFT estimates for (A) California, high variance with most counties above 1 for CWTFT (B) South Dakota, low variance with most values below 1 for CWIFT (C) Maryland, high variance with most values below 1 for CWIFT ](plots/county_state_heatmaps.png){#fig-county-state-heatmap fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
 
@@ -208,7 +206,7 @@ version control git & git hub
 
 ## Questions for further investigation (50-100 words)
 
-How does getting setup compare to other statistical software you may have used? If setup was an issue, have you searched for any free workshops or materials online? Try using R with RStudio and the tidyverse by playing with a data project of your own and/or by downloading the data exploration examples RStudio project from its GitHub webpage (https://github.com/akuyper/cwift-examples). 
+How does getting setup compare to other statistical software you may have used? If setup was an issue, have you searched for any free workshops or materials online? Try using R with RStudio and the tidyverse by playing with a data project of your own and/or by downloading the data exploration examples RStudio project from its GitHub webpage (<https://github.com/akuyper/cwift-examples>). 
 
 ## Suggested further reading (50-100 words/3 resources & why)
 
