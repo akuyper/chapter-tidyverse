@@ -37,7 +37,7 @@ The R project is a GNU project, which means it is a free software, mass collabor
 
 The base R system is actively maintained and updated for various operating systems by the R Core Team. Typically there is 1 major update along with 2 minor updates per year. Having an active release schedule like this is critical for the success of open source software. This ensures up-to-date compatibility with operating systems and signals to users that it won't be abandoned.
 
-While the base R system adequately covers most statistical needs and functionality, it is arguably the large ecosystem of extension packages that has contributed to R's growth. Packages can provide implementations of methodologies not currently in base R, improve the usability of R, or provide tools that allow you to do non-statistical tasks (i.e. sending emails or building websites). In particular, the tidyverse packages have been very influential and have made working with R significantly more accessible. We will take a closer look at the tidyverse packages later in this chapter.
+While the base R system adequately covers most statistical needs and functionality, it is arguably the large ecosystem of extension packages that has contributed to R's growth. Packages can provide implementations of methodologies not currently in base R, improve the usability of R, or provide tools that allow you to do non-statistical tasks (e.g. sending emails or building websites). In particular, the tidyverse packages have been very influential and have made working with R significantly more accessible. We will take a closer look at the tidyverse packages later in this chapter.
 
 As of this writing, the CRAN package repository features over 21,000 contributed packages. The CRAN repository checks all packages for compatibility and expects the packages to be maintained, which means users can expect packages from the CRAN repository to work with R. This work is done by a network of volunteers, called the CRAN team, and it is a testament to the size and dedication of the R community that this is possible. Though CRAN is the primary R package repository, users can find packages through:
 
@@ -120,11 +120,11 @@ To install the tidyverse packages, go to **output pane \> Packages \> Install**.
 
 Beyond the core tidyverse packages, we will be using several additional packages as we work through a few data explorations in the next section. Packages such as `tidycenus` (tools to obtain census data in tidy format), `{janitor}` (tools for cleaning data), `{sf}` (tools for making maps), and `{skimr}` (tools to quickly skim data). Packages like `{tidycensus}` and `{janitor}` are often described as tidyverse-adjacent because they are built to work with the tidyverse and therefore adhere to the shared design philosophies. 
 
-The tidyverse's influence on the R package ecosystem has been transformative. It has laid a foundation upon which developers in a large open-source community can collaborate and build tools that are much more accessible (i.e. tidyverse-adjacent packages). Developers can build their packages to leverage all existing tools and benefits of the tidyverse ecosystem which helps to alleviate dependency issues and compatibility with current and future features. Ultimately, this means users will be able to pick up new packages much more efficiently because of the shared design philosophies and standards. 
+The tidyverse's influence on the R package ecosystem has been transformative. It has laid a foundation upon which developers in a large open-source community can collaborate and build tools that are much more accessible (e.g. tidyverse-adjacent packages). Developers can build their packages to leverage all existing tools and benefits of the tidyverse ecosystem which helps to alleviate dependency issues and compatibility with current and future features. Ultimately, this means users will be able to pick up new packages much more efficiently because of the shared design philosophies and standards. 
 
 ## Data Exploration Examples
 
-
+Now to demonstrate the use of R with RStudio and tidyverse tools. We will be going through the initial steps of examining data and exploring it. 
 
 Pipping
 
@@ -143,9 +143,9 @@ my_data |>
 ```
 
 
-### Dataset
+### The data
 
-We will be using data from the Education Demographic and Geographic Estimates (EDGE) Program. Specifically we will be using the American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT or CWIFT) [@edge-data]. 
+We will be using the 2021 American Community Survey Comparable Wage Index for Teachers (ACS-CWIFT or CWIFT) data from the Education Demographic and Geographic Estimates (EDGE) Program [@edge-data]. 
 
 > The Comparable Wage Index (CWI) is an index that was initially created by the National Center for
 Education Statistics (NCES) to facilitate comparison of educational expenditures across locales
@@ -155,54 +155,56 @@ graduates who are not PK-12 educators as determined by reported occupational cat
 used by researchers to adjust district-level finance data at different levels in order to make better
 comparisons across geographic areas. [@edge-cwift-tech-report]
 
-The CWIFT is designed to identify geographic variation in wages for college-educated workers outside of
-the education field after controlling for job-related and demographic characteristics. The basic premise
-of any CWI is that all types of workers demand higher wages in areas where the cost of living is high or
-desirable local amenities (such as good climate, low crime rates, or access to beaches, museums, and
-fancy restaurants) are lacking. As a result, it should be possible to measure most of the geographic
-variation in the cost of hiring teachers and other PK-12 educators by observing systematic, regional
-variations in the wages of comparable workers who are not PK-12 educators.
+The basic idea behind any CWI is that workers will demand higher wages in areas with high costs of living or where commonly sought after local amenities such as a good climate, low crime rates, and museums are lacking. This means, it should be possible to measure geographic variation in the cost of hiring teachers (PK-12 educators) by observing systematic, regional variations in the wages of comparable workers who are not PK-12 educators. Put another way, say accountants, nurses, data analyst, and software engineering all earn 20% more than the national average for their professions in San Francisco, then it is reasonable to expect that the cost of hiring teachers in San Francisco would also be 20% more than the national average for teachers.
 
-In theory, if accountants, nurses, and computer programmers, for example, all earn 5 percent more than
-the national average for their professions in Houston, then it is reasonable to expect that the cost of
-hiring teachers in Houston would also be 5 percent more than the national average for teachers.
+A core motivation for the developing CWIFT estimates is to enable more meaningful comparisons concerning teacher expenditures across school districts. That is, we can use the CWIFT to normalize dollar amounts and make them comparable by dividing the dollar amounts by the district-level CWIFT, which are already normalized to the national average wage. 
 
-Using the Index to Make Geographic Adjustments
+Suppose we wanted to make comparisons between salary expenditure data from the Elementary and Secondary Information (ELSI) system for the 2019-20 school year. The total current expenditures on salary per pupil for the Los Angeles Unified School District was \$6,137 and was \$5,433 in Palm Beach County School District (Florida). So it appears Los Angeles Unified is spending \$704 more on salary per pupil. This is obviously misleading comparison since the cost of living is very different betwen these two areas. When adjust for their difference in purchasing power using their 2021 CWIFT estimates, Los Angeles Unified is \$5,369 (\$6,137 / 1.143) and Palm Beach County is \$5,601 (\$5,433 / 0.970). The story has flipped and Palm Beach effectively spent \$232 more per pupil than Los Angeles Unified.
 
-One important reason for the development of the CWIFT is to enable more meaningful comparisons
-across school districts. To normalize dollar amounts and make them comparable, divide the dollar
-amounts by the district-level CWIFT, which are already normalized to the national average wage. For
-example, suppose one wished to make an adjustment to expenditure data from the Elementary and
-Secondary Information (ELSI) system for the 2013-14 school year. The 2015 CWIFT for Los Angeles
-Unified School District 1.129. So the \$6,137 total current expenditures on salary per pupil in Los Angeles Unified for 2013-14, when normalized, are equal to \$5,436 (\$6,137 / 1.129). The 2013-14 total current expenditures on salary per pupil by Palm Beach County School District (in Florida) were \$5,433.Normalized to reflect the lower cost of hiring in this area, they are the equivalent of \$5,677 (\$5,433 / 0.957). In other words, even though Los Angeles Unified School District spent more than Palm Beach County School District in nominal terms, once the two dollar figures were adjusted for the difference in purchasing power between the two districts, Palm Beach County School District effectively spent \$241 more per pupil than did Los Angeles Unified School District.
-
-Geographic Adjustment Applied to State Aid
-
-Because one of the great virtues of the CWIFT is that it is outside of school district control, another
-application of the CWIFT is to adjust state aid to a school district for differences in wages. For example, consider a program intended to provide an additional \$100 per pupil, but adjusted for geographic variations in the cost of education. The 2015 CWIFT for New Rochelle, NY in 2015 is 1.163, or 16.3 percent higher than the national average; the 2015 CWIFT for Buffalo, NY is 0.902, or approximately 10 percent lower than the national average. Therefore, to receive the same increase in purchasing power
-as a \$100 increase in Buffalo City School District, New Rochelle City School District would need to receive \$128.94 (\$100*(1.163 / 0.902))
+Another useful application of the CWIFT is to adjust state aid to a school district based on differences in wages due to geographical variations. Suppose a state, say South Dakota, is considering a program intended to provide an additional \$100 per pupil in wages. An extra \$100 per pupil does not go as far in different locations around the state (i.e. geographic variations in the cost of education). The 2021 CWIFT for Harrisburg, SD is 0.895, or about 10% lower than the national average; the 2021 CWIFT for Pierre, SD is 0.739, or approximately 26% lower than the national average. To receive the same increase in purchasing power as a \$100 increase in the Pierre School District, the Harrisburg School District would need to receive \$121.11 (\$100*(0.895 / 0.739)).
 
 ### dplyr: data wrangling
 
 Demo(s) with comments and a few tips for best practices
 
+![Demonstration of various plots that can be created when examining state CWIFT estimates: (A) Approximate 95% confidence intervals for state CWIFT estimates (B) Density plot for state CWIFT estimates (C) Boxplot for state CWIFT estimates, (D) A density dot plot for state CWIFT estimates](plots/state_plot_collection.png){#fig-state-plot-collection fig-alt="Demonstration of various plots that can be created when examining state CWIFT estimates" fig-align="center"}
+
+![Demonstration of two choropleth/heat maps created when examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/state_heatmaps.png){#fig-state-heatmaps fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+
 ### ggplot2: data visualization
 
 Demo(s) with comments and a few tips for best practices
 
-## Comment: AI & R coding
+![Demonstration of a grouped boxplot to examine county CWIFT estimates.  estimates](plots/cwift_estimates_by_state.png){#fig-county-estimates fig-alt="Demonstration of a grouped boxplot to examine county CWIFT estimates" fig-align="center"}
 
-`chattr` `tidychatmodels` GitHub `copilot` `ask`
+![Demonstration of a choropleth/heat map to examine county CWIFT estimates. estimates](plots/county_cwift_heatmap.png){#fig-us-county-heatmap fig-alt="Demonstration of a choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
+
+![Demonstration of arranging plots to make comparisons between county CWIFT estimates within states. County maps with shading according to CWIFT estimates for (A) California, high variance with most counties above 1 for CWTFT (B) South Dakota, low variance with most values below 1 for CWIFT (C) Maryland, high variance with most values below 1 for CWIFT ](plots/county_state_heatmaps.png){#fig-county-state-heatmap fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+
+![Demonstration of two choropleth/heat maps created when examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/county_cwift_by_income.png){#fig-county-cwift-income fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+
+
+## Comment on AI & R coding
+
+Generative artificial intelligence, based on large language models (LLMs), looks to be a transformational assistive technology. It has the potential to supercharge productivity and is well on its way to becoming a standard tool in a researcher's tool kit. All facets of the research process are being impacted, which includes writing R code and conducting data analyses. There are several experimental packages or addins to leverage LLMs directly in RStudio: `{chattr}`, `{tidychatmodels}`, `{gptstudio}` and GitHub's Copilot to name a few. Copilot is explicitly for code-completion and generation. 
+
+As far as coding and conducting data analyses, these tools have made it possible to simply provide prompts that contain basic guidance and in return we receive annotated code with explanations. They are capable of providing code exploratory data analyses. It is almost too good to be true, and it can be. Without sufficient knowledge of the R syntax and available tools like the tidyverse, it becomes difficult to judge the quality of the output or even if the output is worthwhile. So, for R-novices these tools can be a potential trap. Like all tools they need to be used wisely. A good starting point would be to use them as debuggers of your own code or asking them to improve upon your code. For more experienced R users, they can be used to generate starter/skeleton code. This can help cut down on some of the tedious coding work, but it requires a level of discernment that only comes with experience.
+
+Before we jump right to using these tools in research, we need to be aware of data security and ethical concerns. We must be careful with the data these tools have access to. In fact, usage of LLMs may represent breaches of data use agreements and/or violation of privacy for study participants. We suggest a default practice of never exposing experimental data to AI tools, unless cleared in advanced. To be clear, AI tools can still be used to generate code, you just shouldn't include access to your data in the prompts.
+
+Bottom line. AI tools can be very useful, epecially for coding. But they must be used with caution when handling confidential or private data.
 
 ## Conclusion
 
-Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used to document the work. While beyond the scope chapter, we encourge you to
 
-version control git & git hub
 
 ------------------------------------------------------------------------
 
 ## Research essentials (250-300 words)
+
+Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used to document the work. While beyond the scope chapter, we encourge you to
+
+version control git & git hub
 
 ## Questions for further investigation (50-100 words)
 
