@@ -81,7 +81,7 @@ By default, workspaces will load everything that you had been working on previou
 
 ![RStudio's Globol Options: Workspace Best Practice](image/rstudio-workspace-options.png){#fig-rstudio-wrk-options fig-alt="Adjusting RStudio's global options for workspaces to not restore at startup and never save on exit." fig-align="center" width="696"}
 
-The larger and more sprawling research and analysis work gets, the more important it becomes to be organized. Meaning, it is important to have a "home base" of operations where everything for your data analysis or research work is self contained. By using RStudio projects it becomes straightforward to organize your work. You can think of an RStudio project as being a home directory/folder that will ultimately contain everything for your data analysis project. RStudio projects provide a solid workflow that will serve you well in the future:
+The larger and more sprawling research and analysis work becomes, the more important it is to be organized. Meaning, it is important to have a "home base" of operations where everything for your data analysis or research work is self contained. By using RStudio projects it becomes straightforward to organize your work. You can think of an RStudio project as being a home directory/folder that will ultimately contain everything for your data analysis project. RStudio projects provide a solid workflow that will serve you well in the future:
 
 -   When starting a data analysis project (or any work in R), create a new RStudio project,
 -   Keep all data files there; organized in a data sud-directory.
@@ -90,7 +90,7 @@ The larger and more sprawling research and analysis work gets, the more importan
 
 By using an RStudio project, everything you need is in one place, and cleanly separated from all the other projects that you are working on. The also make collaboration easier. The folders could be maintained on a shared drive so or version control software like git can be integrated into the projects. If used appropriately, then we should be able to simply zip/compress the RStudio project folder and share it with anyone else. 
 
-To create a new project in the RStudio, use the **File \> New Project**. In the New Project wizard that pops up, select **New Directory**, then **New Project**. Pick a name for the project, for example "cwift-examples" (name of project for examples provided later in this chapter), and then click the **Create Project** button. This will launch a new RStudio Project inside a new folder called "cwift-examples". The name of the project should appear in the top-right hand corner of Rstudio as seen in FIGURE REFERENCE. A good piece of advice, if it says "Project: (None)", then don't do any work. Set up a miscellaneous project for scratch work and musings. Always be working in a project.
+To create a new project in the RStudio, use the **File \> New Project**. In the New Project wizard that pops up, select **New Directory**, then **New Project**. Pick a name for the project, for example "cwift-examples" (name of project for examples provided later in this chapter), and then click the **Create Project** button. This will launch a new RStudio Project inside a new folder called "cwift-examples". The name of the project should appear in the top-right hand corner of Rstudio as seen in @fig-cwift-examples-project. A good piece of advice, if it says "Project: (None)", then don't do any work. Set up a miscellaneous project for scratch work and musings. Always be working in a project.
 
 ## Tidyverse
 
@@ -124,21 +124,25 @@ The tidyverse's influence on the R package ecosystem has been transformative. It
 
 ## Data Exploration Examples
 
-Time to see R with RStudio and tidyverse in action. We will providing highlights from a short exploration of educational data that has a spatial or geographical component. The objective is to demonstrate the usefulness and flexibility of using these tools for data work. For those interested in seeing more details and/or wanting to work through the code directly, then please visit the GitHub repository (<https://github.com/akuyper/cwift-examples>) for this data exploration. We encourage readers to explore the GitHub repository because it is a demonstration of best practices put into action.  
+Time to see R with RStudio and tidyverse in action. We will providing highlights from a short exploration of educational data that has a spatial or geographical component. The objective is to demonstrate the usefulness and flexibility of using these tools for data work. For those interested in seeing more details and/or wanting to work through the code directly, then please visit the GitHub repository (<https://github.com/akuyper/cwift-examples>) for this data exploration. Regardless, we encourage readers to explore the GitHub repository because it is a demonstration of best practices when working with data.  
 
 Before taking a closer look at the data and exploration work, let's peak at the layout of the project and discuss what we see in @fig-cwift-examples-project:
 
 - It is clear we are working in a project because the project name, "cwift-examples", is visible in the top-right corner. 
-- The R script in the Source Pane is well organized. It has comments to help guide humans through the code, it starts with a preamble that loads the necessary packages and data, and we see indentation and white/negative spaces being used to make the code more readable --- also makes it easier to debug. 
+- The R script in the Source Pane is well organized. It has comments to help guide humans through the code, it starts with a preamble that loads the necessary packages and data, and we see indentation and white/negative spaces being used to make the code more readable --- also makes it easier to debug. It follows The tidyverse style guide [@tdyverse-sytle-guide]. As a best practice, a consistent style guide should always be used with a data project.
 - The Environment Pane contains items created by running the code. 
 - The Console Pane has remnants of code being ran (it is pushed from the source and executed/ran in the console). 
 - The Output Pane is displaying the Files tab and we can see the project well organized with appropriate sub-directories and file names.
 
 ![Layout overview for the cwift-examples project](image/project-overview.png){#fig-cwift-examples-project fig-alt="Layout overview for the cwift-examples project" fig-align="center"}
 
-Note on piping
+A closer look at the **Source Pane: R Script** in @fig-cwift-examples-project reveals that the `|>` is being used repeatedly. This is the pipe operator and the tidyverse use it to build data pipelines (i.e. take a dataset and perform a series of actions on it). Code writing and readability is generally easier when using the pipe. 
 
-![Using piping or not in R](image/piping.png){#fig-piping fig-alt="Non-piping vs piping" fig-align="center"}
+Consider @fig-piping, it provides a simple example to demonstrate the difference between using pipe or not. We have a dataset, called `my_data`, and we want to sequentially apply actions `h()`, `g()`, and `f()`, That is we want to take `my_data`, *and then* apply `h()`, *and then* apply `g()`, *and then* finally apply `f()`. Replacing the *and then*'s with `|>` naturally leads to the piping example in @fig-piping. Non-piping requires that we work from the inside out and doesn't really match how we naturally organize the work. 
+
+There is another pipe operator, `%>%`, that is commonly used because it came with the tidyverse and pre-dated `|>`. They generally work the same so it is best to pick one and stick with it as a matter practice. `|>` is commonly called the native pipe because it was added to base R. So ,`|>` is always available in R. We don't have to load the `tidyverse` or more specifically the `maggrittr` package to have a pipe operator.
+
+![Non-piping or piping in R](image/piping.png){#fig-piping fig-alt="Non-piping vs piping" fig-align="center"}
 
 
 ### The data
@@ -160,6 +164,8 @@ A core motivation for the developing CWIFT estimates is to enable more meaningfu
 Suppose we wanted to make comparisons between salary expenditure data from the Elementary and Secondary Information (ELSI) system for the 2019-20 school year. The total current expenditures on salary per pupil for the Los Angeles Unified School District was \$6,137 and was \$5,433 in Palm Beach County School District (Florida). So it appears Los Angeles Unified is spending \$704 more on salary per pupil. This is obviously misleading comparison since the cost of living is very different betwen these two areas. When adjust for their difference in purchasing power using their 2021 CWIFT estimates, Los Angeles Unified is \$5,369 (\$6,137 / 1.143) and Palm Beach County is \$5,601 (\$5,433 / 0.970). The story has flipped and Palm Beach effectively spent \$232 more per pupil than Los Angeles Unified.
 
 Another useful application of the CWIFT is to adjust state aid to a school district based on differences in wages due to geographical variations. Suppose a state, say South Dakota, is considering a program intended to provide an additional \$100 per pupil in wages. An extra \$100 per pupil does not go as far in different locations around the state (i.e. geographic variations in the cost of education). The 2021 CWIFT for Harrisburg, SD is 0.895, or about 10% lower than the national average; the 2021 CWIFT for Pierre, SD is 0.739, or approximately 26% lower than the national average. To receive the same increase in purchasing power as a \$100 increase in the Pierre School District, the Harrisburg School District would need to receive \$121.11 (\$100*(0.895 / 0.739)).
+
+![The first 15 observations in the state CWIFT dataset](image/state-data.png){#fig-state-data fig-alt="The first 15 observations in the state CWIFT dataset" fig-align="center"}
 
 ### dplyr: data wrangling
 
