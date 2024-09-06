@@ -13,6 +13,12 @@ author: "Arend M Kuyper"
 
 format: docx
 
+crossref: 
+  subref-labels: alpha A
+  
+nocite: |
+  @r-project, @tigris, @tidycensus
+  
 execute:
   warning: false
   
@@ -124,7 +130,7 @@ The tidyverse's influence on the R package ecosystem has been transformative. It
 
 ## Data Exploration Examples
 
-Time to see R with RStudio and tidyverse in action. We will providing highlights from a short exploration of educational data that has a spatial or geographical component. The objective is to demonstrate the usefulness and flexibility of using these tools for data work. For those interested in seeing more details and/or wanting to work through the code directly, then please visit the GitHub repository (<https://github.com/akuyper/cwift-examples>) for this data exploration. Regardless, we encourage readers to explore the GitHub repository because it is a demonstration of best practices when working with data.  
+Time to see R with RStudio and tidyverse in action. We will providing highlights from a short exploration of educational data that has a spatial or geographical component. The objective is to demonstrate the usefulness and flexibility of using these tools for data work. So we will be sharing and discussing the outputs while refraining from going through code which would be of little value unless you have started to learn R and the tidyverse. For those interested in seeing more details and/or wanting to work through the code directly, then visit the GitHub repository (<https://github.com/akuyper/cwift-examples>) for this data exploration. Regardless, we encourage readers to explore the GitHub repository because it is a demonstration of best practices when working with data. 
 
 Before taking a closer look at the data and exploration work, let's peak at the layout of the project and discuss what we see in @fig-cwift-examples-project:
 
@@ -136,14 +142,13 @@ Before taking a closer look at the data and exploration work, let's peak at the 
 
 ![Layout overview for the cwift-examples project](image/project-overview.png){#fig-cwift-examples-project fig-alt="Layout overview for the cwift-examples project" fig-align="center"}
 
-A closer look at the **Source Pane: R Script** in @fig-cwift-examples-project reveals that the `|>` is being used repeatedly. This is the pipe operator and the tidyverse use it to build data pipelines (i.e. take a dataset and perform a series of actions on it). Code writing and readability is generally easier when using the pipe. 
+A closer look at the R Script in @fig-cwift-examples-project reveals that `|>` operator is being used repeatedly. This is the pipe operator and the tidyverse is designed to use it to build data pipelines (i.e. take a dataset and perform a series of actions on it). Code writing and readability is generally easier when using the pipe. 
 
-Consider @fig-piping, it provides a simple example to demonstrate the difference between using pipe or not. We have a dataset, called `my_data`, and we want to sequentially apply actions `h()`, `g()`, and `f()`, That is we want to take `my_data`, *and then* apply `h()`, *and then* apply `g()`, *and then* finally apply `f()`. Replacing the *and then*'s with `|>` naturally leads to the piping example in @fig-piping. Non-piping requires that we work from the inside out and doesn't really match how we naturally organize the work. 
+Consider @fig-piping, it provides a simple example demonstrating the difference between using the pipe or not. We have a dataset, called `my_data`, and we want to sequentially apply actions `h()`, `g()`, and `f()`, That is, we want to take `my_data`, *and then* apply `h()`, *and then* apply `g()`, *and then* finally apply `f()`. Replacing the *and then*'s with `|>` naturally leads to the piping example in @fig-piping. The non-piping requires that we work from the inside out which is not nearly as smooth or natural. 
 
-There is another pipe operator, `%>%`, that is commonly used because it came with the tidyverse and pre-dated `|>`. They generally work the same so it is best to pick one and stick with it as a matter practice. `|>` is commonly called the native pipe because it was added to base R. So ,`|>` is always available in R. We don't have to load the `tidyverse` or more specifically the `maggrittr` package to have a pipe operator.
+Be aware that there is another pipe operator, `%>%`. It is commonly used since comes with the tidyverse and pre-dated `|>`. The two generally work the same, so it is best to pick one and stick with it as a matter practice. `|>` is commonly called the native pipe because it was added to base R. Meaning, `|>` is always available in R. We don't have to load the `tidyverse` or more specifically the `maggrittr` package to have a pipe operator.
 
 ![Non-piping or piping in R](image/piping.png){#fig-piping fig-alt="Non-piping vs piping" fig-align="center"}
-
 
 ### The data
 
@@ -161,31 +166,60 @@ The basic idea behind any CWI is that workers will demand higher wages in areas 
 
 A core motivation for the developing CWIFT estimates is to enable more meaningful comparisons concerning teacher expenditures across school districts. That is, we can use the CWIFT to normalize dollar amounts and make them comparable by dividing the dollar amounts by the district-level CWIFT, which are already normalized to the national average wage. 
 
-Suppose we wanted to make comparisons between salary expenditure data from the Elementary and Secondary Information (ELSI) system for the 2019-20 school year. The total current expenditures on salary per pupil for the Los Angeles Unified School District was \$6,137 and was \$5,433 in Palm Beach County School District (Florida). So it appears Los Angeles Unified is spending \$704 more on salary per pupil. This is obviously misleading comparison since the cost of living is very different betwen these two areas. When adjust for their difference in purchasing power using their 2021 CWIFT estimates, Los Angeles Unified is \$5,369 (\$6,137 / 1.143) and Palm Beach County is \$5,601 (\$5,433 / 0.970). The story has flipped and Palm Beach effectively spent \$232 more per pupil than Los Angeles Unified.
+Suppose we wanted to make comparisons between salary expenditure data from the Elementary and Secondary Information (ELSI) system for the 2019-20 school year [@usdoe2023ccd]. The total current expenditures on salary per pupil for the Los Angeles Unified School District was \$6,137 and was \$5,433 in Palm Beach County School District (Florida). So it appears Los Angeles Unified is spending \$704 more on salary per pupil. This is obviously misleading comparison since the cost of living is very different betwen these two areas. When adjust for their difference in purchasing power using their 2021 CWIFT estimates, Los Angeles Unified is \$5,369 (\$6,137 / 1.143) and Palm Beach County is \$5,601 (\$5,433 / 0.970). The story has flipped and Palm Beach effectively spent \$232 more per pupil than Los Angeles Unified.
 
 Another useful application of the CWIFT is to adjust state aid to a school district based on differences in wages due to geographical variations. Suppose a state, say South Dakota, is considering a program intended to provide an additional \$100 per pupil in wages. An extra \$100 per pupil does not go as far in different locations around the state (i.e. geographic variations in the cost of education). The 2021 CWIFT for Harrisburg, SD is 0.895, or about 10% lower than the national average; the 2021 CWIFT for Pierre, SD is 0.739, or approximately 26% lower than the national average. To receive the same increase in purchasing power as a \$100 increase in the Pierre School District, the Harrisburg School District would need to receive \$121.11 (\$100*(0.895 / 0.739)).
 
+There are 3 data files containing CWIFT estimates at the state, county, and LEA (Local Education Agency; typically school districts). The general structure of each data file:
+
+- CWIFT estimate
+- Standard error of the CWIFT estimate
+- Name of geographic unit (State, county, or LEA)
+- Unique identifier (State/County FIPS code or LEA ID)
+
+@fig-state-data provides a quick peak at the strucure of the state level data file. 
+
 ![The first 15 observations in the state CWIFT dataset](image/state-data.png){#fig-state-data fig-alt="The first 15 observations in the state CWIFT dataset" fig-align="center"}
 
-### dplyr: data wrangling
+These are simple data files, but what makes them interesting is their geographic/spatial components and our ability to quickly join mapping data and other geographic/spatial measurements using the `tigris` and `tidycensus` packages. `tigris` provides access to mapping data needed to build appropriate visualizations and `tidycensus` allows us to access interesting variables from the US Census such as median household income estimates. 
 
-Demo(s) with comments and a few tips for best practices
+### Exploring State CWIFTs 
 
-![Demonstration of various plots for examining state CWIFT estimates: (A) Approximate 95% confidence intervals for state CWIFT estimates (B) Density plot for state CWIFT estimates (C) Boxplot for state CWIFT estimates, (D) A density dot plot for state CWIFT estimates](plots/state_plot_collection.png){#fig-state-plot-collection fig-alt="Demonstration of various plots that can be created when examining state CWIFT estimates" fig-align="center"}
+The exploration with state CWIFT estimates. We can obtain a summary report using the `skimr` package. In one short call we have a report that breaks down our data and provides appropriate summary statistics for the variable types, as seen in @fig-skimr-state-output. We are particularly interested in the `st_cwiftest` row since that is our variable of interest. The mean (0.952) is larger than median (0.912), hinting at some asymmetry in the distribution. The values range from a 0.809 to 1.27, while 75% of the values are less than or equal to 1. Numerical summaries are useful and informative, but visual inspections should always be done.
 
-![Demonstration of two choropleth/heat maps for examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/state_heatmaps.png){#fig-state-heatmaps fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+![Summary report on state CWIFT dataset produced by `skimr` package](image/skimr-state-output.png){#fig-skimr-state-output fig-alt="Summary report on state CWIFT dataset produced by `skimr` package" fig-align="center"}
 
-### ggplot2: data visualization
+@fig-state-plot-collection provides a collection of plots used to visually inspect state CWIFT estimates. The images also display different levels of graphical adornment. @fig-state-plot-collection(B) and @fig-state-plot-collection(C) are basic run the code with default settings, while @fig-state-plot-collection(A) and @fig-state-plot-collection(D) use a different theme and clean titles up a little. This collection of plots are inline with the numerical summary, but @fig-state-plot-collection(A) also provides an ordering of states and whether their CWIFT are statistically different from one another at a 0.05 level. As we would expect, high cost of living states like California and New are towards the top of the list (larger CWIFT values) and low cost of living states like West Virginia and South Dakota are towards the bottom (smaller CWIFT values). Unless you have a very good sense of US geography it would be difficult to detect spatial relationships between the state CWIFTs. 
 
-Demo(s) with comments and a few tips for best practices
+![Collection of various plots for examining state CWIFT estimates: (A) Approximate 95% confidence intervals for state CWIFT estimates (B) Density plot for state CWIFT estimates (C) Boxplot for state CWIFT estimates, (D) A density dot plot for state CWIFT estimates](plots/state_plot_collection.png){#fig-state-plot-collection fig-alt="Collection of various plots that can be created when examining state CWIFT estimates" fig-align="center"}
 
-![Demonstration of a grouped boxplot to examine county CWIFT estimates](plots/cwift_estimates_by_state.png){#fig-county-estimates fig-alt="Demonstration of a grouped boxplot to examine county CWIFT estimates" fig-align="center"}
+Accordingly, @fig-state-heatmaps displays two choropleth maps to explore the spatial relationships between state CWIFTs. The maps appear to show that coastal states have higher values for CWIFTs, while the interior states have lower values. To build these, we used the `tigris` package to obtain mapping data, performed a little data wrangling to join the data sets, and then made the maps. Each map was completed in about 15-20 total lines of code, which is quite remarkable. It is a testament to the tidyverse tools and the general R package ecosystem.
 
-![Demonstration of a choropleth/heat map to examine county CWIFT estimates](plots/county_cwift_heatmap.png){#fig-us-county-heatmap fig-alt="Demonstration of a choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
+![Two types of choropleth/heat maps for examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/state_heatmaps.png){#fig-state-heatmaps fig-alt="Two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
 
-![Demonstration of arranging plots to make comparisons between county CWIFT estimates within states. County maps with shading according to CWIFT estimates for (A) California, high variance with most counties above 1 for CWTFT (B) South Dakota, low variance with most values below 1 for CWIFT (C) Maryland, high variance with most values below 1 for CWIFT ](plots/county_state_heatmaps.png){#fig-county-state-heatmap fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+### Exploring County CWIFTs
 
-![Demonstration of two choropleth/heat maps created when examining state CWIFT estimates: (A) US state map with shading according to CWIFT estimates (B) State bins map with shading according to CWIFT estimates](plots/county_cwift_by_income.png){#fig-county-cwift-income fig-alt="Demonstration of two choropleth/heat maps created when examining state CWIFT estimates" fig-align="center"}
+The next natural step in the data exploration was to take a look at the county CWIFT estimates. While the state level CWIFTs provided a more macro view of teacher labor markets, we want to know if there is variation within state teacher labor markets and what that would look like.
+
+The distribution of county CWIFTs was found to be similar to the distribution state CWIFTs. There is more variation, signaling there is significant within state variation, and a shift towards lower values. That is, there are more counties with lower CWIFT values. Let's skip looking at those parts of the data exploration and instead focus on within state variation in CWIFTs and how it compares across states.
+
+As we can see in @fig-county-estimates, states like California and Maryland appear to have a high level variation in county CWIFTs while a state like South Dakota has very little variation in values. Once again it is difficult to understand potential spatial relationships so choropleth maps were constructed. 
+
+![Grouped boxplot to examine county CWIFT estimates by state](plots/cwift_estimates_by_state.png){#fig-county-estimates fig-alt="Grouped boxplot to examine county CWIFT estimates by state" fig-align="center"}
+
+@fig-us-county-heatmap seems to indicate that it is the west cost counties with the highest CWIFT. There are high values for east coast counties, but it seems to be contained to fewer counties. It is hard to see this given how small counties are in the east. We need to zoom in and look at states directly. Going from the US map to a single state requires only 1 line of code! Arranging state plots from different regions of the US takes 1 more line of code thanks to the `patchwork` package, 4-5 more lines to make it look nice. 
+
+The end result is @fig-county-state-heatmap. California has high variance in county CWIFT values with most counties above 1; South Dakota has low variance in values with most below 1 for CWIFT; and Maryland has high variance in values with most values below 1 for CWIFT. 
+
+![Choropleth/heat map to examine county CWIFT estimates](plots/county_cwift_heatmap.png){#fig-us-county-heatmap fig-alt="Choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
+
+![Demonstration of arranging plots to make comparisons between county CWIFT estimates within states. County maps with shading according to CWIFT estimates is provided for (A) California, (B) South Dakota, and (C) Maryland](plots/county_state_heatmaps.png){#fig-county-state-heatmap fig-alt="Choropleth/heat map to examine county CWIFT estimates" fig-align="center"}
+
+### CWIFTs and Household Income
+
+To explore this relationship we need to get state and county level estimates from the US Census Bureau. We could go to a website and download this information, but the `tidycensus` package makes getting this very easy. With 5 lines of code we can get this information and much more from the US Census Bureau. With a little data wrangling and a few lines of code to build the plots, we have the graphs in @fig-county-cwift-income. Yet more evidence of the power of the R ecosystem, since this can all be done in 10-15 lines of code. 
+
+![Examining the relationship of CWIFT with median household income at (A) the state level and (B) the county level](plots/cwift_by_income_maps.png){#fig-county-cwift-income fig-alt="Examining the relationship of CWIFT with median household income at state and county levels." fig-align="center"}
 
 
 ## Comment on AI & R coding
@@ -200,6 +234,7 @@ Bottom line. AI tools can be very useful, epecially for coding. But they must be
 
 ## Conclusion
 
+Hopefully this chapter has you convinced that learning R with RStudio and tidyverse would be a worthwhile investment of your time, especially for those with a focus on quantitative analyses. The R community is extremely supportive and there is a lot of material out there to help you get started. The **Suggested further reading** were selected to help you get started with these tools. Additionally, we hope you realize the importance of starting with best data practices to improve your research workflows, regardless of using R or not. 
 
 
 ------------------------------------------------------------------------
@@ -210,19 +245,25 @@ Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used
 
 version control git & git hub
 
+
+
+[@pkg-tidyverse]
+
+[@tdyverse-sytle-guide]
+
 ## Questions for further investigation (50-100 words)
 
 How does getting setup compare to other statistical software you may have used? If setup was an issue, have you searched for any free workshops or materials online? Try using R with RStudio and the tidyverse by playing with a data project of your own and/or by downloading the data exploration examples RStudio project from its GitHub webpage (<https://github.com/akuyper/cwift-examples>). 
 
 ## Suggested further reading (50-100 words/3 resources & why)
 
-@ggplot2-online-book
+Hadley Wickham, Mine Çetinkaya-Rundel, & Grolemund, G. (2024). *R for data science (2e)*. <https://r4ds.hadley.nz/>. The is the starting point for almost anyone looking to learn R for data analyses. It is particularly good instilling best practices for data workflows. 
 
-@r4ds
+Hadley Wickham, Danielle Navarro, & Pedersen, T. L. (2024). *ggplot2: Elegant graphics for data analysis (3e)*. <https://ggplot2-book.org/>. Data visualization is such an important tool for data exploration and communication that this book is standard for anyone that wants to learn how to leverage everything `ggplot2` has to offer. 
 
-[@tdyverse-sytle-guide]
+*Tidyverse*. (2024). <https://www.tidyverse.org/>. The tidyverse website has en entire section dedicated to helping learners at any level and suggestions for other materials. 
 
-[@pkg-tidyverse]
+
 
 ## References
 
