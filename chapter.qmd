@@ -17,7 +17,7 @@ crossref:
   subref-labels: alpha A
   
 nocite: |
-  @r-project, @tigris, @tidycensus
+  @r-project, @tigris, @tidycensus, @pkg-tidyverse
   
 execute:
   warning: false
@@ -239,23 +239,23 @@ Hopefully this chapter has you convinced that learning R with RStudio and tidyve
 
 ------------------------------------------------------------------------
 
-## Research essentials (250-300 words)
+## Research essentials
 
-Other than R scripts, Quarto (.qmd) or R Markdown (.Rmd) documents could be used to document the work. While beyond the scope chapter, we encourge you to
+This chapter discussed first steps of doing data work/research precisely because we feel it is not given enough time in traditional research curricula. We only touched on a few best practices, put there is so much more that students could add on to this R with RStudio and tidyverse setup. Two highly recommended must have additions are: 
 
-version control git & git hub
+- Learning how to use Quarto (.qmd files; <https://quarto.org/>) or R Markdown (.Rmd files) for authoring should be at the top of the list of tools to learn. Either can be used to author/create create paramaterized reports, books, websites, PhD thesis, research articles, etc. Consider exploring CiteDrive (<https://www.citedrive.com/en/>) to manage citations -- works very welll with Quarto. 
 
+- Using version control, such as git, along with GitHub for collaboration. Having a trail of save points for your work, whether for coding or authoring, is extremely valuable when conducting research.
 
+Fun fact, this chapter was written using these tools.
 
-[@pkg-tidyverse]
+While it might seem like a lot of extra work and likely overkill for projects you have now, it is best to avoid developing bad habits. Try adding one thing at a time and challenge yourself to use these tools. Consider taking an old data project or past class work and convert it over to a workflow using these tools. Another option would be to replicate the work for the data exploration in this chapter (GitHub repo: <https://github.com/akuyper/cwift-examples>).
 
-[@tdyverse-sytle-guide]
-
-## Questions for further investigation (50-100 words)
+## Questions for further investigation 
 
 How does getting setup compare to other statistical software you may have used? If setup was an issue, have you searched for any free workshops or materials online? Try using R with RStudio and the tidyverse by playing with a data project of your own and/or by downloading the data exploration examples RStudio project from its GitHub webpage (<https://github.com/akuyper/cwift-examples>). 
 
-## Suggested further reading (50-100 words/3 resources & why)
+## Suggested further reading 
 
 Hadley Wickham, Mine Çetinkaya-Rundel, & Grolemund, G. (2024). *R for data science (2e)*. <https://r4ds.hadley.nz/>. The is the starting point for almost anyone looking to learn R for data analyses. It is particularly good instilling best practices for data workflows. 
 
